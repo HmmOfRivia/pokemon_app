@@ -8,6 +8,7 @@ class AppTheme {
     required this.variant,
     required this.colors,
     required this.textStyle,
+    required this.theme,
     required this.brightness,
   });
 
@@ -16,6 +17,7 @@ class AppTheme {
       variant: AppThemeVariants.light,
       colors: AppColors.light(),
       textStyle: AppTextStyle.light(),
+      theme: AppThemeData.themeDataLight,
       brightness: Brightness.light,
     );
   }
@@ -25,6 +27,7 @@ class AppTheme {
       variant: AppThemeVariants.dark,
       colors: AppColors.dark(),
       textStyle: AppTextStyle.light(),
+      theme: AppThemeData.themeDataDark,
       brightness: Brightness.dark,
     );
   }
@@ -35,9 +38,13 @@ class AppTheme {
 
   final AppTextStyle textStyle;
 
-  final Brightness brightness;
+  final ThemeData theme;
 
-  ThemeData get themeDataLight {
+  final Brightness brightness;
+}
+
+class AppThemeData {
+  static ThemeData get themeDataLight {
     final colors = AppColors.light();
 
     return ThemeData(
@@ -60,7 +67,7 @@ class AppTheme {
     );
   }
 
-  ThemeData get themeDataDark {
+  static ThemeData get themeDataDark {
     final colors = AppColors.dark();
 
     return ThemeData(
@@ -83,7 +90,7 @@ class AppTheme {
     );
   }
 
-  SnackBarThemeData _getSnackBarTheme(AppColors colors) {
+  static SnackBarThemeData _getSnackBarTheme(AppColors colors) {
     return SnackBarThemeData(
       shape: RoundedRectangleBorder(),
       backgroundColor: colors.accentColor,
@@ -92,7 +99,7 @@ class AppTheme {
     );
   }
 
-  DialogTheme _getDialogTheme(AppColors colors) {
+  static DialogTheme _getDialogTheme(AppColors colors) {
     return DialogTheme(
       backgroundColor: colors.backgroundColor,
       elevation: 0,
@@ -102,13 +109,13 @@ class AppTheme {
     );
   }
 
-  IconThemeData _getIconTheme(AppColors colors) {
+  static IconThemeData _getIconTheme(AppColors colors) {
     return IconThemeData(
       color: colors.iconColor,
     );
   }
 
-  DividerThemeData _dividerTheme(AppColors colors) {
+  static DividerThemeData _dividerTheme(AppColors colors) {
     return DividerThemeData(
       color: colors.dividerColor,
       space: 1,
@@ -118,7 +125,7 @@ class AppTheme {
     );
   }
 
-  TextTheme get _textTheme {
+  static TextTheme get _textTheme {
     return const TextTheme(
       headline1: AppTextStyle.headline1,
       headline2: AppTextStyle.headline2,
@@ -131,7 +138,7 @@ class AppTheme {
     );
   }
 
-  InputDecorationTheme _getInputDecorationTheme(AppColors colors) {
+  static InputDecorationTheme _getInputDecorationTheme(AppColors colors) {
     return InputDecorationTheme(
       isDense: true,
       contentPadding: EdgeInsets.symmetric(
@@ -159,7 +166,7 @@ class AppTheme {
     );
   }
 
-  ButtonThemeData get _buttonTheme {
+  static ButtonThemeData get _buttonTheme {
     return ButtonThemeData(
       textTheme: ButtonTextTheme.primary,
       shape: RoundedRectangleBorder(
@@ -168,7 +175,7 @@ class AppTheme {
     );
   }
 
-  ElevatedButtonThemeData get _elevatedButtonTheme {
+  static ElevatedButtonThemeData get _elevatedButtonTheme {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         shape: const RoundedRectangleBorder(
@@ -181,7 +188,7 @@ class AppTheme {
     );
   }
 
-  TextButtonThemeData get _textButtonTheme {
+  static TextButtonThemeData get _textButtonTheme {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
         textStyle: _textTheme.button?.copyWith(
