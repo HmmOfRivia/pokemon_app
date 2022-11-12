@@ -3,6 +3,8 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get_it/get_it.dart';
+import 'package:pokemon_app/config/injection.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -24,6 +26,10 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   };
 
   Bloc.observer = AppBlocObserver();
+
+  //TODO(fliszkiewicz): parametrize this
+  configureInjection('');
+  await GetIt.I.allReady();
 
   await runZonedGuarded(
     () async => runApp(await builder()),
