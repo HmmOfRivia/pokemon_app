@@ -50,8 +50,7 @@ class AppColors {
   );
 
   Color? getCardColors(String color) {
-    //TODO(fliszkiewicz) : Match colors with API values
-
+    // TODO(fliszkiewicz): Match colors with API values
     const Color greenCardColor = Color.fromARGB(255, 108, 200, 177);
     const Color redCardColor = Color.fromARGB(255, 207, 118, 141);
     const Color puprleCardColor = Color.fromARGB(255, 64, 50, 97);

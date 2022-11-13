@@ -3,5 +3,7 @@ linter:
   rules:
     public_member_api_docs: false
 analyzer:
+  errors:
+    todo: ignore
   exclude:
     - lib/config/injection.config.dart

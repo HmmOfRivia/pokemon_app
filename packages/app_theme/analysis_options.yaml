@@ -1,3 +1,5 @@
 analyzer:
   exclude:
     - lib/**/*.gen.dart
+  errors:
+    todo: ignore

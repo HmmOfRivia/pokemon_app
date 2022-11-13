@@ -27,7 +27,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
   Bloc.observer = AppBlocObserver();
 
-  //TODO(fliszkiewicz): parametrize this
+  // TODO(fliszkiewicz): parametrize this
   configureInjection('');
   await GetIt.I.allReady();
 
