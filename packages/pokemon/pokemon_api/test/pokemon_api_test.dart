@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pokemon_api/pokemon_api.dart';
-import 'package:pokemon_api/src/models/pokemon_species.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
 

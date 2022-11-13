@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:pokemon_api/pokemon_api.dart';
-import 'package:pokemon_api/src/models/pokemon_species.dart';
 
 class PokemonApiClient {
   PokemonApiClient({http.Client? httpClient})
