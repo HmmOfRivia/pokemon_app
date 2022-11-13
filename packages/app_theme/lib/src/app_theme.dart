@@ -1,9 +1,10 @@
 import 'package:app_theme/app_theme.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 enum AppThemeVariants { light, dark }
 
-class AppTheme {
+class AppTheme extends Equatable {
   AppTheme({
     required this.variant,
     required this.colors,
@@ -26,7 +27,7 @@ class AppTheme {
     return AppTheme(
       variant: AppThemeVariants.dark,
       colors: AppColors.dark(),
-      textStyle: AppTextStyle.light(),
+      textStyle: AppTextStyle.dark(),
       theme: AppThemeData.themeDataDark,
       brightness: Brightness.dark,
     );
@@ -41,6 +42,9 @@ class AppTheme {
   final ThemeData theme;
 
   final Brightness brightness;
+
+  @override
+  List<Object?> get props => [variant];
 }
 
 class AppThemeData {
