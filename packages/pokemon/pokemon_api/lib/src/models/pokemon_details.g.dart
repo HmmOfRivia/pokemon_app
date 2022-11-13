@@ -22,8 +22,8 @@ Map<String, dynamic> _$PokemonDetailsToJson(PokemonDetails instance) =>
     <String, dynamic>{
       'weight': instance.weight,
       'base_experience': instance.baseExperience,
-      'sprites': instance.sprite,
+      'sprites': PokemonDetails._encodeSprite(instance.sprite),
       'stats': instance.stats,
-      'types': instance.types,
+      'types': PokemonDetails._encodeType(instance.types),
       'species': instance.species,
     };

@@ -10,7 +10,7 @@ class PokemonStats extends Equatable {
 
   final int effort;
 
-  @JsonKey(name: 'stat', fromJson: _decodeStat)
+  @JsonKey(name: 'stat', fromJson: _decodeStat, toJson: _encodeStat)
   final String name;
 
   const PokemonStats({
@@ -26,6 +26,10 @@ class PokemonStats extends Equatable {
 
   static String _decodeStat(Map input) {
     return input['name'];
+  }
+
+  static Map<String, dynamic> _encodeStat(String input) {
+    return <String, dynamic>{'name': input};
   }
 
   @override

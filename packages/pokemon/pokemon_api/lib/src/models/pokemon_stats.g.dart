@@ -16,5 +16,5 @@ Map<String, dynamic> _$PokemonStatsToJson(PokemonStats instance) =>
     <String, dynamic>{
       'base_stat': instance.value,
       'effort': instance.effort,
-      'stat': instance.name,
+      'stat': PokemonStats._encodeStat(instance.name),
     };

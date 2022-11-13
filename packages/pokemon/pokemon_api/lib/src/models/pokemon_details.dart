@@ -13,12 +13,12 @@ class PokemonDetails extends Equatable {
   @JsonKey(name: 'base_experience')
   final int baseExperience;
 
-  @JsonKey(name: 'sprites', fromJson: _decodeSprite)
+  @JsonKey(name: 'sprites', fromJson: _decodeSprite, toJson: _encodeSprite)
   final String sprite;
 
   final List<PokemonStats> stats;
 
-  @JsonKey(fromJson: _decodeType)
+  @JsonKey(fromJson: _decodeType, toJson: _encodeType)
   final List<PokemonType> types;
 
   final PokemonSpecies species;
@@ -41,8 +41,29 @@ class PokemonDetails extends Equatable {
     return input['other']['home']['front_default'];
   }
 
+  static Map<String, dynamic> _encodeSprite(String input) {
+    return <String, dynamic>{
+      'other': {
+        'home': {
+          'front_default': input,
+        }
+      }
+    };
+  }
+
   static List<PokemonType> _decodeType(List input) {
     return input.map((type) => PokemonType.fromJson(type['type'])).toList();
+  }
+
+  static List<Map<String, dynamic>> _encodeType(List<PokemonType> input) {
+    List<Map<String, dynamic>> typesList = [];
+    for (final type in input) {
+      typesList.add({
+        'type': {'name': type.name}
+      });
+    }
+
+    return typesList;
   }
 
   @override
