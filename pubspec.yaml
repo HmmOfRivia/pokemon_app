@@ -22,6 +22,8 @@ dependencies:
   intl: ^0.17.0
   persistent_storage:
     path: packages/storage/persistent_storage
+  pokemon_api:
+    path: packages/pokemon/pokemon_api
   shared_preferences: ^2.0.15
   storage:
     path: packages/storage/storage_interface

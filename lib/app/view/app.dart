@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pokemon_api/pokemon_api.dart';
 import 'package:pokemon_app/l10n/l10n.dart';
 import 'package:pokemon_app/theme/bloc/theme_bloc.dart';
 import 'package:pokemon_app/theme/view/app_theme_wrapper.dart';
@@ -10,6 +11,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PokemonApiClient()
+        .fetchPokemonSpecies('https://pokeapi.co/api/v2/pokemon-species/55/')
+        .then((value) => value.color);
     return BlocProvider(
       create: (context) => GetIt.I<ThemeBloc>()..add(ThemeLoad()),
       child: BlocBuilder<ThemeBloc, ThemeState>(
