@@ -46,14 +46,14 @@ class _PokemonListTile extends StatelessWidget {
         }
 
         if (state is PokemonListTileLoading) {
-          return const _TileLoadingPlaceholder();
+          return const TileLoadingPlaceholder();
         }
 
         if (state is PokemonListTileError) {
           return const _TileErrorPlaceholder();
         }
 
-        return const _TileLoadingPlaceholder();
+        return const TileLoadingPlaceholder();
       },
     );
   }
@@ -193,8 +193,8 @@ class _LoadedListTile extends StatelessWidget {
   }
 }
 
-class _TileLoadingPlaceholder extends StatelessWidget {
-  const _TileLoadingPlaceholder();
+class TileLoadingPlaceholder extends StatelessWidget {
+  const TileLoadingPlaceholder({super.key});
 
   static const double tileHeight = 140;
 

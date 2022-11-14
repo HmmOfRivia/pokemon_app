@@ -12,6 +12,8 @@ class PokemonListInitial extends PokemonListState {}
 
 class PokemonListLoading extends PokemonListState {}
 
+class PokemonListConnectionError extends PokemonListState {}
+
 class PokemonListError extends PokemonListState {}
 
 class PokemonListLoaded extends PokemonListState {

@@ -1,9 +1,12 @@
+import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pokemon_app/l10n/l10n.dart';
 import 'package:pokemon_app/pokemon_list_page/bloc/pokemon_list_bloc.dart';
 import 'package:pokemon_app/pokemon_list_page/view/widgets/pokemon_list_page_app_bar.dart';
 import 'package:pokemon_app/pokemon_list_page/view/widgets/pokemon_list_tile.dart';
+import 'package:pokemon_app/theme/view/app_theme_wrapper.dart';
 
 class PokemonListPage extends StatelessWidget {
   const PokemonListPage({super.key});
@@ -29,8 +32,7 @@ class PokemonListView extends StatelessWidget {
           builder: (context, state) {
             if (state is PokemonListLoaded) {
               if (state.noSearchResultsFound) {
-                // TODO(fliszkiewicz): add placeholder if no search results
-                return const SliverToBoxAdapter();
+                return const _SliverPokemonListSearchNoResultsPlaceholder();
               }
 
               final pokemons = state.filteredPokemon.isNotEmpty
@@ -50,14 +52,106 @@ class PokemonListView extends StatelessWidget {
               );
             }
 
-            // TODO(fliszkiewicz): no connection placeholder
+            if (state is PokemonListConnectionError) {
+              return const _SliverPokemonListConnectionErrorPlaceholder();
+            }
+
+            if (state is PokemonListLoading) {
+              return const _SliverListLoadingPlaceholder();
+            }
+
             // TODO(fliszkiewicz): error placeholder
-            // TODO(fliszkiewicz): loading placeholder
 
             return const SliverToBoxAdapter();
           },
         )
       ],
+    );
+  }
+}
+
+class _SliverPokemonListSearchNoResultsPlaceholder extends StatelessWidget {
+  const _SliverPokemonListSearchNoResultsPlaceholder();
+
+  static const double iconSize = 50;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.theme;
+    final l10n = context.l10n;
+    return SliverFillRemaining(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.sentiment_dissatisfied_rounded,
+              color: theme.textStyle.hint.color,
+              size: iconSize,
+            ),
+            const SizedBox(height: AppDimensions.spacer4x),
+            Text(
+              l10n.noResultsFound,
+              style: theme.textStyle.hint,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SliverPokemonListConnectionErrorPlaceholder extends StatelessWidget {
+  const _SliverPokemonListConnectionErrorPlaceholder();
+
+  static const double iconSize = 50;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.theme;
+    final l10n = context.l10n;
+
+    return SliverFillRemaining(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.wifi,
+              color: theme.textStyle.hint.color,
+              size: iconSize,
+            ),
+            const SizedBox(height: AppDimensions.spacer4x),
+            Text(
+              l10n.noConnection,
+              style: theme.textStyle.hint,
+            ),
+            const SizedBox(height: AppDimensions.spacer4x),
+            MaterialButton(
+              onPressed: () =>
+                  context.read<PokemonListBloc>().add(LoadPokemons()),
+              color: theme.colors.accentColor,
+              child: Text(l10n.tryAgain),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SliverListLoadingPlaceholder extends StatelessWidget {
+  const _SliverListLoadingPlaceholder();
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return const TileLoadingPlaceholder();
+        },
+        childCount: 5,
+      ),
     );
   }
 }

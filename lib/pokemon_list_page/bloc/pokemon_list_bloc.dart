@@ -54,6 +54,8 @@ class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
     try {
       final pokemons = await _repository.getPokemons();
       emit(PokemonListLoaded(pokemons: pokemons));
+    } on HttpException catch (error, _) {
+      emit(PokemonListConnectionError());
     } catch (error, stackTrace) {
       emit(PokemonListError());
       onError(error, stackTrace);

@@ -5,7 +5,7 @@
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
-// ignore_for_file: directives_ordering,unnecessary_import
+// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal
 
 import 'package:flutter/widgets.dart';
 
@@ -14,6 +14,9 @@ class $AssetsLottieGen {
 
   /// File path: assets/lottie/theme_switcher_lottie.json
   String get themeSwitcherLottie => 'assets/lottie/theme_switcher_lottie.json';
+
+  /// List of all assets
+  List<String> get values => [themeSwitcherLottie];
 }
 
 class Assets {
@@ -47,7 +50,7 @@ class AssetGenImage {
     bool matchTextDirection = false,
     bool gaplessPlayback = false,
     bool isAntiAlias = false,
-    String? package = 'pokemon_app',
+    String? package,
     FilterQuality filterQuality = FilterQuality.low,
     int? cacheWidth,
     int? cacheHeight,
@@ -80,7 +83,9 @@ class AssetGenImage {
     );
   }
 
+  ImageProvider provider() => AssetImage(_assetName);
+
   String get path => _assetName;
 
-  String get keyName => 'packages/pokemon_app/$_assetName';
+  String get keyName => _assetName;
 }
