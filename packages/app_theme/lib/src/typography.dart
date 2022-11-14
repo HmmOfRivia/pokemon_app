@@ -19,6 +19,7 @@ class AppTextStyle {
       cardTitle: headline3.copyWith(color: TextColors.white),
       cardNumber: subtitle1.copyWith(color: TextColors.white),
       chip: bodyText2.copyWith(color: TextColors.white),
+      inputText: bodyText1.copyWith(color: TextColors.black),
       detailTitle: headline2.copyWith(color: TextColors.white),
       statsRow: bodyText1.copyWith(color: TextColors.grey),
       tab: subtitle2.copyWith(color: TextColors.grey),
@@ -32,6 +33,7 @@ class AppTextStyle {
       cardTitle: headline3.copyWith(color: TextColors.white),
       cardNumber: subtitle1.copyWith(color: TextColors.white),
       chip: bodyText2.copyWith(color: TextColors.white),
+      inputText: bodyText1.copyWith(color: TextColors.white),
       detailTitle: headline2.copyWith(color: TextColors.white),
       statsRow: bodyText1.copyWith(color: TextColors.grey),
       tab: subtitle2.copyWith(color: TextColors.grey),
@@ -48,6 +50,8 @@ class AppTextStyle {
 
   final TextStyle chip;
 
+  final TextStyle inputText;
+
   /// Detail page text styles
   final TextStyle detailTitle;
 
@@ -63,6 +67,7 @@ class AppTextStyle {
     required this.cardTitle,
     required this.cardNumber,
     required this.chip,
+    required this.inputText,
     required this.detailTitle,
     required this.statsRow,
     required this.tab,

@@ -85,9 +85,11 @@ class _LoadedListTile extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(AppDimensions.borderRadius1x),
       ),
-      margin: const EdgeInsets.symmetric(
-        horizontal: AppDimensions.spacer4x,
-        vertical: AppDimensions.spacer1x,
+      margin: const EdgeInsets.fromLTRB(
+        AppDimensions.spacer4x,
+        AppDimensions.spacer4x,
+        AppDimensions.spacer4x,
+        0,
       ),
       child: Stack(
         children: [
@@ -162,9 +164,11 @@ class _TileLoadingPlaceholder extends StatelessWidget {
         color: theme.colors.placeholderColor,
         borderRadius: BorderRadius.circular(AppDimensions.borderRadius1x),
       ),
-      margin: const EdgeInsets.symmetric(
-        horizontal: AppDimensions.spacer4x,
-        vertical: AppDimensions.spacer1x,
+      margin: const EdgeInsets.fromLTRB(
+        AppDimensions.spacer4x,
+        AppDimensions.spacer4x,
+        AppDimensions.spacer4x,
+        0,
       ),
     );
   }
@@ -186,9 +190,11 @@ class _TileErrorPlaceholder extends StatelessWidget {
         color: theme.colors.placeholderColor,
         borderRadius: BorderRadius.circular(AppDimensions.borderRadius1x),
       ),
-      margin: const EdgeInsets.symmetric(
-        horizontal: AppDimensions.spacer4x,
-        vertical: AppDimensions.spacer1x,
+      margin: const EdgeInsets.fromLTRB(
+        AppDimensions.spacer4x,
+        AppDimensions.spacer4x,
+        AppDimensions.spacer4x,
+        0,
       ),
       child: Center(
         child: Text(

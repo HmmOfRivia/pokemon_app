@@ -146,10 +146,10 @@ class AppThemeData {
     return InputDecorationTheme(
       isDense: true,
       filled: true,
-      fillColor: Colors.white,
+      fillColor: colors.textInputColor,
       contentPadding: EdgeInsets.symmetric(
         horizontal: AppDimensions.spacer2x,
-        vertical: AppDimensions.spacer4x,
+        vertical: AppDimensions.spacer2x,
       ),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(

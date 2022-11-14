@@ -7,6 +7,7 @@ class AppColors {
     required this.iconColor,
     required this.dividerColor,
     required this.placeholderColor,
+    required this.textInputColor,
   });
 
   factory AppColors.light() {
@@ -16,6 +17,7 @@ class AppColors {
       iconColor: Colors.white,
       dividerColor: Color.fromARGB(255, 129, 166, 190),
       placeholderColor: Color.fromARGB(255, 230, 230, 230),
+      textInputColor: Colors.white,
     );
   }
 
@@ -26,6 +28,7 @@ class AppColors {
       iconColor: Colors.white,
       dividerColor: Color.fromARGB(255, 170, 175, 178),
       placeholderColor: Color.fromARGB(255, 76, 76, 77),
+      textInputColor: Color.fromARGB(255, 59, 59, 59),
     );
   }
 
@@ -38,6 +41,8 @@ class AppColors {
   final Color dividerColor;
 
   final Color placeholderColor;
+
+  final Color textInputColor;
 
   final ColorScheme scheme = ColorScheme.fromSwatch(
     primarySwatch: MaterialColor(0xFF81A6BE, {

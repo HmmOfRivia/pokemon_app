@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_app/l10n/l10n.dart';
 import 'package:pokemon_app/pokemon_list_page/bloc/pokemon_list_bloc.dart';
+import 'package:pokemon_app/pokemon_list_page/view/widgets/theme_switcher_button.dart';
 import 'package:pokemon_app/theme/view/app_theme_wrapper.dart';
 
 class PokemonListPageAppBar extends StatelessWidget {
@@ -14,19 +15,27 @@ class PokemonListPageAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeColors = context.theme.colors;
-    final themeStyles = context.theme.textStyle;
+    final theme = context.theme;
+
     final l10n = context.l10n;
 
     return SliverAppBar(
       pinned: true,
       expandedHeight: expandedHeight,
       toolbarHeight: toolbarHeight,
-      backgroundColor: themeColors.accentColor,
+      backgroundColor: theme.colors.accentColor,
       titleSpacing: 20,
-      title: Text(
-        l10n.homeTitle,
-        style: themeStyles.homeTitle,
+      title: Row(
+        children: [
+          Text(
+            l10n.homeTitle,
+            style: theme.textStyle.homeTitle,
+          ),
+          const Spacer(),
+          ThemeSwitcherButton(
+            isLightTheme: theme.variant == AppThemeVariants.light,
+          ),
+        ],
       ),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -43,12 +52,13 @@ class PokemonListPageAppBar extends StatelessWidget {
             child: TextField(
               decoration: const InputDecoration().copyWith(
                 hintText: l10n.searchPokemonHint,
-                hintStyle: themeStyles.hint,
+                hintStyle: theme.textStyle.hint,
                 prefixIcon: Icon(
                   Icons.search,
-                  color: themeStyles.hint.color,
+                  color: theme.textStyle.hint.color,
                 ),
               ),
+              style: theme.textStyle.inputText,
               onChanged: (value) => context
                   .read<PokemonListBloc>()
                   .add(SearchPokemonByName(text: value)),
