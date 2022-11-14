@@ -1,3 +1,9 @@
 {
-    "@@locale": "en"
+    "@@locale": "en",
+    "homeTitle": "Your pokedex",
+    "tileLoadingError": "Error while loading. Try later",
+    "searchPokemonHint": "Search pokemon name",
+    "noResultsFound": "No results found",
+    "noConnection": "No internet",
+    "tryAgain": "Try again"
 }

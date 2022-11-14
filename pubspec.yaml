@@ -8,9 +8,11 @@ environment:
   flutter: 3.3.7
 
 dependencies: 
+  animations: ^2.0.7
   app_theme:
     path: packages/app_theme
   bloc: ^8.1.0  
+  draggable_home: ^1.0.4
   equatable: ^2.0.5
   flutter:
     sdk: flutter
@@ -20,10 +22,13 @@ dependencies:
   get_it: ^7.2.0
   injectable: ^1.5.4
   intl: ^0.17.0
+  lottie: ^2.0.0
   persistent_storage:
     path: packages/storage/persistent_storage
   pokemon_api:
     path: packages/pokemon/pokemon_api
+  pokemon_repository:
+    path: packages/pokemon/pokemon_repository
   shared_preferences: ^2.0.15
   storage:
     path: packages/storage/storage_interface
@@ -32,6 +37,7 @@ dependencies:
 dev_dependencies:
   bloc_test: ^9.1.0
   build_runner: 
+  flutter_gen_runner: ^5.1.0
   flutter_test:
     sdk: flutter
   injectable_generator: 
@@ -41,3 +47,13 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - assets/lottie/
+    - assets/images/
+
+flutter_gen:
+  assets:
+    package_parameter_enabled: true
+  output: lib/src/generated/
+  lineLength: 80
+

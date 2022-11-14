@@ -145,27 +145,32 @@ class AppThemeData {
   static InputDecorationTheme _getInputDecorationTheme(AppColors colors) {
     return InputDecorationTheme(
       isDense: true,
+      filled: true,
+      fillColor: colors.textInputColor,
       contentPadding: EdgeInsets.symmetric(
-        horizontal: AppDimensions.space2x,
-        vertical: AppDimensions.spacer4x,
+        horizontal: AppDimensions.spacer2x,
+        vertical: AppDimensions.spacer2x,
       ),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
           color: colors.accentColor,
           width: 1.2,
         ),
+        borderRadius: BorderRadius.circular(AppDimensions.borderRadius2x),
       ),
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(
           color: colors.accentColor,
           width: 1.2,
         ),
+        borderRadius: BorderRadius.circular(AppDimensions.borderRadius2x),
       ),
       border: OutlineInputBorder(
         borderSide: BorderSide(
           color: colors.accentColor,
           width: 1.2,
         ),
+        borderRadius: BorderRadius.circular(AppDimensions.borderRadius2x),
       ),
     );
   }
