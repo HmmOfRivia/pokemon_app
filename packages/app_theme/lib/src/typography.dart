@@ -21,7 +21,7 @@ class AppTextStyle {
       chip: bodyText2.copyWith(color: TextColors.white),
       inputText: bodyText1.copyWith(color: TextColors.black),
       detailTitle: headline2.copyWith(color: TextColors.white),
-      statsRow: bodyText1.copyWith(color: TextColors.grey),
+      statsRow: bodyText1.copyWith(color: TextColors.black),
       tab: subtitle2.copyWith(color: TextColors.grey),
       hint: bodyText1.copyWith(color: TextColors.grey),
     );

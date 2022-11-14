@@ -59,7 +59,7 @@ class AppColors {
     }),
   );
 
-  static Color? getCardColor(String color) {
+  static Color getCardColor(String color) {
     // TODO(fliszkiewicz): Match colors with API values
     const Color greenCardColor = Color.fromARGB(255, 108, 200, 177);
     const Color redCardColor = Color.fromARGB(255, 207, 118, 141);

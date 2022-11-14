@@ -8,6 +8,7 @@ environment:
   flutter: 3.3.7
 
 dependencies: 
+  animations: ^2.0.7
   app_theme:
     path: packages/app_theme
   bloc: ^8.1.0  

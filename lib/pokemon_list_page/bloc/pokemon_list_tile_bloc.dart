@@ -33,7 +33,9 @@ class PokemonListTileBloc
             pokemonDetails.species.copyWith(details: pokemonSpeciesDetails),
       );
 
-      emit(PokemonListTileLoaded(pokemonDetails: updatedDetails));
+      emit(
+        PokemonListTileLoaded(pokemonDetails: updatedDetails, name: event.name),
+      );
     } catch (error, stackTrace) {
       emit(PokemonListTileError());
       onError(error, stackTrace);

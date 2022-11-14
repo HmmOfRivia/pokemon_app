@@ -1,9 +1,12 @@
+import 'package:animations/animations.dart';
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 import 'package:pokemon_api/pokemon_api.dart';
 import 'package:pokemon_app/l10n/l10n.dart';
+import 'package:pokemon_app/pokemon_details_page.dart/view/pokemon_details_page.dart';
 import 'package:pokemon_app/pokemon_list_page/bloc/pokemon_list_tile_bloc.dart';
 import 'package:pokemon_app/theme/view/app_theme_wrapper.dart';
 import 'package:pokemon_repository/pokemon_repository.dart';
@@ -23,27 +26,22 @@ class PokemonListTile extends StatelessWidget {
       create: (context) => PokemonListTileBloc(
         GetIt.I<PokemonRepository>(),
       )..add(LoadDetailsEvent(name)),
-      child: _PokemonListTile(name: name),
+      child: const _PokemonListTile(),
     );
   }
 }
 
 class _PokemonListTile extends StatelessWidget {
-  const _PokemonListTile({
-    required this.name,
-  });
-
-  final String name;
+  const _PokemonListTile();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PokemonListTileBloc, PokemonListTileState>(
       builder: (context, state) {
         if (state is PokemonListTileLoaded) {
-          return _LoadedListTile(
-            key: key,
-            name: name,
-            pokemonDetails: state.pokemonDetails,
+          return _TileLoaded(
+            name: state.name,
+            details: state.pokemonDetails,
           );
         }
 
@@ -57,6 +55,55 @@ class _PokemonListTile extends StatelessWidget {
 
         return const _TileLoadingPlaceholder();
       },
+    );
+  }
+}
+
+class _TileLoaded extends StatelessWidget {
+  const _TileLoaded({
+    required this.name,
+    required this.details,
+  });
+
+  final String name;
+  final PokemonDetails details;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(
+        AppDimensions.spacer4x,
+        AppDimensions.spacer4x,
+        AppDimensions.spacer4x,
+        0,
+      ),
+      child: OpenContainer(
+        transitionType: ContainerTransitionType.fadeThrough,
+        closedShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            AppDimensions.borderRadius1x,
+          ),
+        ),
+        closedColor: AppColors.getCardColor(
+          details.species.details!.color,
+        ),
+        openColor: AppColors.getCardColor(
+          details.species.details!.color,
+        ),
+        closedBuilder: (_, __) {
+          return _LoadedListTile(
+            key: key,
+            name: name,
+            pokemonDetails: details,
+          );
+        },
+        openBuilder: (_, __) {
+          return PokemonDetailsPage(
+            name: name,
+            details: details,
+          );
+        },
+      ),
     );
   }
 }
@@ -85,12 +132,6 @@ class _LoadedListTile extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(AppDimensions.borderRadius1x),
       ),
-      margin: const EdgeInsets.fromLTRB(
-        AppDimensions.spacer4x,
-        AppDimensions.spacer4x,
-        AppDimensions.spacer4x,
-        0,
-      ),
       child: Stack(
         children: [
           Align(
@@ -100,7 +141,10 @@ class _LoadedListTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name, style: theme.textStyle.cardTitle),
+                Text(
+                  toBeginningOfSentenceCase(name) ?? name,
+                  style: theme.textStyle.cardTitle,
+                ),
                 const SizedBox(height: AppDimensions.spacer2x),
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -113,7 +157,7 @@ class _LoadedListTile extends StatelessWidget {
                         ),
                         backgroundColor: theme.colors.accentColor,
                       ),
-                      const SizedBox(width: AppDimensions.spacer2x)
+                      const SizedBox(width: AppDimensions.spacer2x),
                     ],
                   ],
                 ),

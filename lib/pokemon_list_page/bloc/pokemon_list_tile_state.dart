@@ -15,11 +15,14 @@ class PokemonListTileError extends PokemonListTileState {}
 
 class PokemonListTileLoaded extends PokemonListTileState {
   const PokemonListTileLoaded({
+    required this.name,
     required this.pokemonDetails,
   });
+
+  final String name;
 
   final PokemonDetails pokemonDetails;
 
   @override
-  List<Object> get props => [pokemonDetails];
+  List<Object> get props => [name, pokemonDetails];
 }

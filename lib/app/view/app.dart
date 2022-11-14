@@ -18,7 +18,14 @@ class App extends StatelessWidget {
           return AppThemeWrapper(
             data: state.appTheme,
             child: MaterialApp(
-              theme: state.appTheme.theme,
+              theme: state.appTheme.theme
+                ..copyWith(
+                  pageTransitionsTheme: const PageTransitionsTheme(
+                    builders: <TargetPlatform, PageTransitionsBuilder>{
+                      TargetPlatform.android: ZoomPageTransitionsBuilder(),
+                    },
+                  ),
+                ),
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               home: const Scaffold(body: PokemonListPage()),

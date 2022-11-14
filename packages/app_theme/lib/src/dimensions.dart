@@ -7,4 +7,5 @@ abstract class AppDimensions {
 
   static const double borderRadius1x = 6;
   static const double borderRadius2x = 12;
+  static const double borderRadius4x = 24;
 }
