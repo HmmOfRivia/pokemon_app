@@ -15,7 +15,7 @@ abstract class AppFontWeight {
 class AppTextStyle {
   factory AppTextStyle.light() {
     return AppTextStyle(
-      homeTitle: headline2.copyWith(color: TextColors.white),
+      homeTitle: headline1.copyWith(color: TextColors.white),
       cardTitle: headline3.copyWith(color: TextColors.white),
       cardNumber: subtitle1.copyWith(color: TextColors.white),
       chip: bodyText2.copyWith(color: TextColors.white),
@@ -28,7 +28,7 @@ class AppTextStyle {
 
   factory AppTextStyle.dark() {
     return AppTextStyle(
-      homeTitle: headline2.copyWith(color: TextColors.white),
+      homeTitle: headline1.copyWith(color: TextColors.white),
       cardTitle: headline3.copyWith(color: TextColors.white),
       cardNumber: subtitle1.copyWith(color: TextColors.white),
       chip: bodyText2.copyWith(color: TextColors.white),

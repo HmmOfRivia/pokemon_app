@@ -6,6 +6,7 @@ class AppColors {
     required this.backgroundColor,
     required this.iconColor,
     required this.dividerColor,
+    required this.placeholderColor,
   });
 
   factory AppColors.light() {
@@ -14,6 +15,7 @@ class AppColors {
       backgroundColor: Colors.white,
       iconColor: Colors.white,
       dividerColor: Color.fromARGB(255, 129, 166, 190),
+      placeholderColor: Color.fromARGB(255, 230, 230, 230),
     );
   }
 
@@ -22,7 +24,8 @@ class AppColors {
       accentColor: Color.fromARGB(255, 129, 166, 190),
       backgroundColor: Color.fromARGB(255, 54, 54, 54),
       iconColor: Colors.white,
-      dividerColor: Color.fromARGB(255, 129, 166, 190),
+      dividerColor: Color.fromARGB(255, 170, 175, 178),
+      placeholderColor: Color.fromARGB(255, 76, 76, 77),
     );
   }
 
@@ -33,6 +36,8 @@ class AppColors {
   final Color iconColor;
 
   final Color dividerColor;
+
+  final Color placeholderColor;
 
   final ColorScheme scheme = ColorScheme.fromSwatch(
     primarySwatch: MaterialColor(0xFF81A6BE, {
@@ -49,24 +54,34 @@ class AppColors {
     }),
   );
 
-  Color? getCardColors(String color) {
+  static Color? getCardColor(String color) {
     // TODO(fliszkiewicz): Match colors with API values
     const Color greenCardColor = Color.fromARGB(255, 108, 200, 177);
     const Color redCardColor = Color.fromARGB(255, 207, 118, 141);
     const Color puprleCardColor = Color.fromARGB(255, 64, 50, 97);
     const Color blueCardColor = Color.fromARGB(255, 62, 109, 150);
+    const Color brownCardColor = Color.fromARGB(255, 92, 77, 62);
+    const Color yellowCardColor = Color.fromARGB(255, 233, 148, 58);
+    const Color pinkCardColor = Color.fromARGB(255, 255, 149, 243);
 
-    return <String, Color>{
+    const Color unknownCardColor = Colors.black12;
+
+    final cardColor = <String, Color>{
       'green': greenCardColor,
       'red': redCardColor,
       'purple': puprleCardColor,
       'blue': blueCardColor,
+      'brown': brownCardColor,
+      'yellow': yellowCardColor,
+      'pink': pinkCardColor,
     }[color];
+
+    return cardColor ?? unknownCardColor;
   }
 }
 
 abstract class TextColors {
-  static const Color grey = Color.fromARGB(255, 94, 94, 94);
+  static const Color grey = Color.fromARGB(255, 166, 166, 166);
   static const Color white = Colors.white;
   static const Color black = Colors.black;
 }
