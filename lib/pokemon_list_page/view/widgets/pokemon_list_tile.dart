@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:app_theme/app_theme.dart';
+import 'package:favourite_repository/favourite_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -25,6 +26,7 @@ class PokemonListTile extends StatelessWidget {
       key: key,
       create: (context) => PokemonListTileBloc(
         GetIt.I<PokemonRepository>(),
+        GetIt.I<FavouriteRepository>(),
       )..add(LoadDetailsEvent(name)),
       child: const _PokemonListTile(),
     );
@@ -42,6 +44,7 @@ class _PokemonListTile extends StatelessWidget {
           return _TileLoaded(
             name: state.name,
             details: state.pokemonDetails,
+            isFavourite: state.isFavourite,
           );
         }
 
@@ -63,10 +66,12 @@ class _TileLoaded extends StatelessWidget {
   const _TileLoaded({
     required this.name,
     required this.details,
+    required this.isFavourite,
   });
 
   final String name;
   final PokemonDetails details;
+  final bool isFavourite;
 
   @override
   Widget build(BuildContext context) {
@@ -95,12 +100,17 @@ class _TileLoaded extends StatelessWidget {
             key: key,
             name: name,
             pokemonDetails: details,
+            isFavourite: isFavourite,
           );
         },
         openBuilder: (_, __) {
-          return PokemonDetailsPage(
-            name: name,
-            details: details,
+          return BlocProvider.value(
+            value: context.read<PokemonListTileBloc>(),
+            child: PokemonDetailsPage(
+              key: Key(name + isFavourite.toString()),
+              name: name,
+              details: details,
+            ),
           );
         },
       ),
@@ -113,10 +123,14 @@ class _LoadedListTile extends StatelessWidget {
     super.key,
     required this.name,
     required this.pokemonDetails,
+    required this.isFavourite,
   });
 
   final String name;
+
   final PokemonDetails pokemonDetails;
+
+  final bool isFavourite;
 
   static const double tileHeight = 140;
 
@@ -178,13 +192,17 @@ class _LoadedListTile extends StatelessWidget {
               },
             ),
           ),
-          // TODO(fliszkiewicz): add favourites icon logic
           Positioned(
-            top: 20,
-            right: 20,
-            child: Icon(
-              Icons.star_border_outlined,
-              color: theme.colors.iconColor,
+            top: AppDimensions.spacer4x,
+            right: AppDimensions.spacer4x,
+            child: IconButton(
+              onPressed: () => context.read<PokemonListTileBloc>().add(
+                    PokemonChangeFavouriteEvent(isFavourite: !isFavourite),
+                  ),
+              icon: Icon(
+                isFavourite ? Icons.star : Icons.star_border_outlined,
+                color: theme.colors.iconColor,
+              ),
             ),
           ),
         ],

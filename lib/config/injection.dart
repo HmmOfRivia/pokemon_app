@@ -1,3 +1,4 @@
+import 'package:favourite_repository/favourite_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:persistent_storage/persistent_storage.dart';
@@ -22,4 +23,8 @@ abstract class InjectableModule {
 
   @singleton
   PokemonRepository get pokemonRepository => PokemonRepository();
+
+  @singleton
+  Future<FavouriteRepository> get favouriteRepository async =>
+      FavouriteRepository(storage: await persistentStorage);
 }

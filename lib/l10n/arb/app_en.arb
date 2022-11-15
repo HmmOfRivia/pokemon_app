@@ -5,5 +5,7 @@
     "searchPokemonHint": "Search pokemon name",
     "noResultsFound": "No results found",
     "noConnection": "No internet",
-    "tryAgain": "Try again"
+    "tryAgain": "Try again",
+    "weightText": "Weight",
+    "experienceText": "Experience"
 }
