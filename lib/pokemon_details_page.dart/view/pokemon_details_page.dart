@@ -1,8 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 import 'package:pokemon_api/pokemon_api.dart';
+import 'package:pokemon_app/l10n/l10n.dart';
+import 'package:pokemon_app/pokemon_list_page/bloc/pokemon_list_tile_bloc.dart';
 
 import 'package:pokemon_app/theme/view/app_theme_wrapper.dart';
 
@@ -14,6 +16,7 @@ class PokemonDetailsPage extends StatelessWidget {
   });
 
   final String name;
+
   final PokemonDetails details;
 
   static const double imageSize = 300;
@@ -21,6 +24,8 @@ class PokemonDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
+    final l10n = context.l10n;
+
     final height = MediaQuery.of(context).size.height * 0.5;
 
     return Stack(
@@ -49,13 +54,13 @@ class PokemonDetailsPage extends StatelessWidget {
                 ],
                 const SizedBox(height: AppDimensions.spacer5x),
                 _StatsRow(
-                  name: 'Weight',
+                  name: l10n.weightText,
                   value: details.weight,
                   maxValue: 1000,
                 ),
                 const SizedBox(height: AppDimensions.spacer5x),
                 _StatsRow(
-                  name: 'Experience',
+                  name: l10n.experienceText,
                   value: details.baseExperience,
                   maxValue: 300,
                 ),
@@ -165,9 +170,25 @@ class _PokemonDetailsTitleBar extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Icon(
-              Icons.star_border_outlined,
-              color: theme.colors.iconColor,
+            child: BlocBuilder<PokemonListTileBloc, PokemonListTileState>(
+              builder: (context, state) {
+                if (state is PokemonListTileLoaded) {
+                  return IconButton(
+                    onPressed: () => context.read<PokemonListTileBloc>().add(
+                          PokemonChangeFavouriteEvent(
+                            isFavourite: !state.isFavourite,
+                          ),
+                        ),
+                    icon: Icon(
+                      state.isFavourite
+                          ? Icons.star
+                          : Icons.star_border_outlined,
+                      color: theme.colors.iconColor,
+                    ),
+                  );
+                }
+                return const SizedBox();
+              },
             ),
           ),
           Center(

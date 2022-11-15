@@ -8,3 +8,8 @@ class LoadDetailsEvent extends PokemonListTileEvent {
   const LoadDetailsEvent(this.name);
   final String name;
 }
+
+class PokemonChangeFavouriteEvent extends PokemonListTileEvent {
+  const PokemonChangeFavouriteEvent({required this.isFavourite});
+  final bool isFavourite;
+}
