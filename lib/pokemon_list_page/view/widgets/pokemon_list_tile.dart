@@ -7,7 +7,7 @@ import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 import 'package:pokemon_api/pokemon_api.dart';
 import 'package:pokemon_app/l10n/l10n.dart';
-import 'package:pokemon_app/pokemon_details_page.dart/view/pokemon_details_page.dart';
+import 'package:pokemon_app/pokemon_details_page/pokemon_details_page.dart';
 import 'package:pokemon_app/pokemon_list_page/bloc/pokemon_list_tile_bloc.dart';
 import 'package:pokemon_app/theme/view/app_theme_wrapper.dart';
 import 'package:pokemon_repository/pokemon_repository.dart';
