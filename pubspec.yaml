@@ -31,6 +31,7 @@ dependencies:
     path: packages/pokemon/pokemon_api
   pokemon_repository:
     path: packages/pokemon/pokemon_repository
+  reorderables: ^0.5.1
   shared_preferences: ^2.0.15
   storage:
     path: packages/storage/storage_interface

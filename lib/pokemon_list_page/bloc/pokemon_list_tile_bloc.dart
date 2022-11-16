@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:favourite_repository/favourite_repository.dart';
@@ -17,10 +19,18 @@ class PokemonListTileBloc
   ) : super(PokemonListTileInitial()) {
     on<LoadDetailsEvent>(_onLoadPokemon);
     on<PokemonChangeFavouriteEvent>(_onChangeFavourite);
+    on<RemovedFromMemoryEvent>(_onRemovedFromMemory);
+
+    removedFromFavStream =
+        _favouriteRepository.removePokemonStream.stream.listen((name) async {
+      add(RemovedFromMemoryEvent(name: name));
+    });
   }
   final PokemonRepository _repository;
 
   final FavouriteRepository _favouriteRepository;
+
+  late StreamSubscription<String> removedFromFavStream;
 
   Future<void> _onLoadPokemon(
     LoadDetailsEvent event,
@@ -79,5 +89,26 @@ class PokemonListTileBloc
       // TODO(fliszkiewicz): catch exceptions and emit state
       // based on memory if write action fails
     }
+  }
+
+  Future<void> _onRemovedFromMemory(
+    RemovedFromMemoryEvent event,
+    Emitter<PokemonListTileState> emit,
+  ) async {
+    final isFavourite =
+        await _favouriteRepository.isPokemonFavourite(event.name);
+    if (state is PokemonListTileLoaded) {
+      if ((state as PokemonListTileLoaded).name == event.name) {
+        emit(
+          (state as PokemonListTileLoaded).copyWith(isFavourite: isFavourite),
+        );
+      }
+    }
+  }
+
+  @override
+  Future<void> close() {
+    removedFromFavStream.cancel();
+    return super.close();
   }
 }

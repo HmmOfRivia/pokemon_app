@@ -7,5 +7,7 @@
     "noConnection": "No internet",
     "tryAgain": "Try again",
     "weightText": "Weight",
-    "experienceText": "Experience"
+    "experienceText": "Experience",
+    "myFavourites": "My favourites",
+    "addFirstPokemon": "Add first pokemon"
 }
