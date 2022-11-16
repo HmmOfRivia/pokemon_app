@@ -13,3 +13,8 @@ class PokemonChangeFavouriteEvent extends PokemonListTileEvent {
   const PokemonChangeFavouriteEvent({required this.isFavourite});
   final bool isFavourite;
 }
+
+class RemovedFromMemoryEvent extends PokemonListTileEvent {
+  const RemovedFromMemoryEvent({required this.name});
+  final String name;
+}

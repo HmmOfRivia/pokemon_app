@@ -8,11 +8,11 @@ class Pokemon extends Equatable {
   final String name;
 
   @JsonKey(name: 'url')
-  final String detailsUrl;
+  final String? detailsUrl;
 
   const Pokemon({
     required this.name,
-    required this.detailsUrl,
+    this.detailsUrl,
   });
 
   factory Pokemon.fromJson(Map<String, dynamic> json) =>
