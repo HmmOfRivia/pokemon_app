@@ -19,3 +19,11 @@ class FavouritesListReorderEvent extends FavouritesListEvent {
 
   final int newIndex;
 }
+
+class PokemonRemovedEvent extends FavouritesListEvent {
+  const PokemonRemovedEvent({
+    required this.name,
+  });
+
+  final String name;
+}

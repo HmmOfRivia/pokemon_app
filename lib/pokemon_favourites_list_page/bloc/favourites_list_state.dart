@@ -17,5 +17,5 @@ class FavouritesListLoaded extends FavouritesListState {
   final List<Pokemon> favouritesPokemons;
 
   @override
-  List<Object> get props => favouritesPokemons;
+  List<Object> get props => [favouritesPokemons];
 }
