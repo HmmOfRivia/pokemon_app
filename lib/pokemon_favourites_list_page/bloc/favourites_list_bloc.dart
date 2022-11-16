@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:favourite_repository/favourite_repository.dart';
@@ -12,9 +14,17 @@ class FavouritesListBloc
       : super(FavouritesListInitial()) {
     on<FavouritesListLoadEvent>(_onLoadFavouritesPokemons);
     on<FavouritesListReorderEvent>(_onFavouritesReorderable);
+    on<PokemonRemovedEvent>(_onPokemonRemoved);
+
+    removedFromFavStream =
+        _favouriteRepository.removePokemonStream.stream.listen((name) async {
+      add(PokemonRemovedEvent(name: name));
+    });
   }
 
   final FavouriteRepository _favouriteRepository;
+
+  late StreamSubscription<String> removedFromFavStream;
 
   Future<void> _onLoadFavouritesPokemons(
     FavouritesListLoadEvent event,
@@ -43,5 +53,27 @@ class FavouritesListBloc
     final pokemons = pokemonNames.map((name) => Pokemon(name: name)).toList();
 
     emit(FavouritesListLoaded(favouritesPokemons: pokemons));
+  }
+
+  Future<void> _onPokemonRemoved(
+    PokemonRemovedEvent event,
+    Emitter<FavouritesListState> emit,
+  ) async {
+    if (state is FavouritesListLoaded) {
+      final pokemons = (state as FavouritesListLoaded).favouritesPokemons;
+
+      final updatedList = List<Pokemon>.from(pokemons)
+        ..removeWhere(
+          (element) => element.name == event.name,
+        );
+
+      emit(FavouritesListLoaded(favouritesPokemons: updatedList));
+    }
+  }
+
+  @override
+  Future<void> close() {
+    removedFromFavStream.cancel();
+    return super.close();
   }
 }

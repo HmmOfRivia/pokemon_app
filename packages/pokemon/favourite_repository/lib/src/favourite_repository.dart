@@ -11,7 +11,7 @@ class FavouriteRepository {
 
   static const String favouritesKey = 'FavouriteRepository_Favourites';
 
-  BehaviorSubject<String> removePokemonStream = BehaviorSubject();
+  PublishSubject<String> removePokemonStream = PublishSubject();
 
   Future<void> writeFavouriteToStorage(String name) async {
     final currentFavourites =
